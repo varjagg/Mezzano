@@ -46,7 +46,7 @@
 
 (defmethod cl-video:initialize-sink ((aout mezzano-pcm-output))
   (setf (astream aout) (mezzano.driver.sound:make-sound-output-sink
-			; :buffer-size-in-samples
+			:buffer-size-in-samples (cl-video:frame-size (cl-video:audio-rec aout))
 			:format (ecase (cl-video:significant-bits-per-sample (cl-video:audio-rec aout))
 				  (8 :pcm-u8)
 				  (16 :pcm-s16le)))))
